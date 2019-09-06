@@ -24,12 +24,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Quantity)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.User)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.MerchType)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -49,11 +49,11 @@
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
+                @*@Html.displayfor(modelitem => item.user.id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MerchType.Id)
-            </td>
+                @Html.displayfor(modelitem => item.merchtype.id)
+            </td>*@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.MerchId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.MerchId">Details</a> |
