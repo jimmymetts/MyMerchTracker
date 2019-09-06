@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using MyMerchTracker.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MyMerchTracker.Models;
 
 namespace MyMerchTracker
 {
@@ -37,7 +38,7 @@ namespace MyMerchTracker
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

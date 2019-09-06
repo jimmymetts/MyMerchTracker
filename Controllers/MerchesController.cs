@@ -22,7 +22,8 @@ namespace MyMerchTracker.Controllers
         // GET: Merches
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Merch.ToListAsync());
+            var applicationDbContext = _context.Merch.Include(m => m.MerchType).Include(m => m.User);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Merches/Details/5
@@ -34,6 +35,8 @@ namespace MyMerchTracker.Controllers
             }
 
             var merch = await _context.Merch
+                .Include(m => m.MerchType)
+                .Include(m => m.User)
                 .FirstOrDefaultAsync(m => m.MerchId == id);
             if (merch == null)
             {
@@ -46,6 +49,8 @@ namespace MyMerchTracker.Controllers
         // GET: Merches/Create
         public IActionResult Create()
         {
+            ViewData["MerchTypeId"] = new SelectList(_context.MerchType, "Id", "Id");
+            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
             return View();
         }
 
@@ -54,7 +59,7 @@ namespace MyMerchTracker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Description,Title,Price,Quantity,UserId,MerchTypeId")] Merch merch)
+        public async Task<IActionResult> Create([Bind("MerchId,Description,Title,Price,Quantity,UserId,MerchTypeId")] Merch merch)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +67,8 @@ namespace MyMerchTracker.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["MerchTypeId"] = new SelectList(_context.MerchType, "Id", "Id", merch.MerchTypeId);
+            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", merch.UserId);
             return View(merch);
         }
 
@@ -78,6 +85,8 @@ namespace MyMerchTracker.Controllers
             {
                 return NotFound();
             }
+            ViewData["MerchTypeId"] = new SelectList(_context.MerchType, "Id", "Id", merch.MerchTypeId);
+            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", merch.UserId);
             return View(merch);
         }
 
@@ -86,7 +95,7 @@ namespace MyMerchTracker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Description,Title,Price,Quantity,UserId,MerchTypeId")] Merch merch)
+        public async Task<IActionResult> Edit(int id, [Bind("MerchId,Description,Title,Price,Quantity,UserId,MerchTypeId")] Merch merch)
         {
             if (id != merch.MerchId)
             {
@@ -113,6 +122,8 @@ namespace MyMerchTracker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["MerchTypeId"] = new SelectList(_context.MerchType, "Id", "Id", merch.MerchTypeId);
+            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", merch.UserId);
             return View(merch);
         }
 
@@ -125,6 +136,8 @@ namespace MyMerchTracker.Controllers
             }
 
             var merch = await _context.Merch
+                .Include(m => m.MerchType)
+                .Include(m => m.User)
                 .FirstOrDefaultAsync(m => m.MerchId == id);
             if (merch == null)
             {

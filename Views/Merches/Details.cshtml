@@ -35,10 +35,16 @@
             @Html.DisplayFor(model => model.Quantity)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.UserId)
+            @Html.DisplayNameFor(model => model.User)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.UserId)
+            @Html.DisplayFor(model => model.User.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MerchType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MerchType.Id)
         </dd>
     </dl>
 </div>
