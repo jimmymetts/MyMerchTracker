@@ -10,7 +10,7 @@ using MyMerchTracker.Data;
 namespace MyMerchTracker.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190906184936_init")]
+    [Migration("20190906195533_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

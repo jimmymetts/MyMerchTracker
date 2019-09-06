@@ -15,18 +15,21 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.Title)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Quantity)
             </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MerchType)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -36,18 +39,21 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
-            @*<td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Title)
-            </td>*@
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MerchType.Id)
+            </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.MerchId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.MerchId">Details</a> |
