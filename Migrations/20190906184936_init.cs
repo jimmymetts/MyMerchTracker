@@ -180,22 +180,21 @@ namespace MyMerchTracker.Migrations
                     Price = table.Column<double>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: false),
-                    MerchTypeId = table.Column<int>(nullable: false),
-                    ApplicationUserId = table.Column<string>(nullable: true)
+                    MerchTypeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Merch", x => x.MerchId);
                     table.ForeignKey(
-                        name: "FK_Merch_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Merch_MerchType_MerchTypeId",
                         column: x => x.MerchTypeId,
                         principalTable: "MerchType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Merch_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -240,14 +239,14 @@ namespace MyMerchTracker.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Merch_ApplicationUserId",
-                table: "Merch",
-                column: "ApplicationUserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Merch_MerchTypeId",
                 table: "Merch",
                 column: "MerchTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Merch_UserId",
+                table: "Merch",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -274,10 +273,10 @@ namespace MyMerchTracker.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "MerchType");
 
             migrationBuilder.DropTable(
-                name: "MerchType");
+                name: "AspNetUsers");
         }
     }
 }

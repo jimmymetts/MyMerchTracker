@@ -36,13 +36,14 @@ namespace MyMerchTracker.Models
 
         //public bool Active { get; set; }
 
-        //[Required]
-        //public ApplicationUser User { get; set; }
+        [Required]
+        public ApplicationUser User { get; set; }
 
         [Required]
         [Display(Name = "Merch Type")]
         public int MerchTypeId { get; set; }
 
+        public MerchType MerchType { get; set; }
 
 
     }
