@@ -14,7 +14,8 @@ namespace MyMerchTracker.Models
 
         public string label { get; set; }
 
-
+        [NotMapped]
+        public int Quantity { get; set; }
 
         public virtual ICollection<Merch> Merchs { get; set; }
     }

@@ -195,8 +195,6 @@ namespace MyMerchTracker.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(255);
@@ -214,9 +212,9 @@ namespace MyMerchTracker.Migrations
 
                     b.HasKey("MerchId");
 
-                    b.HasIndex("ApplicationUserId");
-
                     b.HasIndex("MerchTypeId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Merch");
                 });
@@ -294,13 +292,14 @@ namespace MyMerchTracker.Migrations
 
             modelBuilder.Entity("MyMerchTracker.Models.Merch", b =>
                 {
-                    b.HasOne("MyMerchTracker.Models.ApplicationUser")
-                        .WithMany("Merchs")
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("MyMerchTracker.Models.MerchType")
+                    b.HasOne("MyMerchTracker.Models.MerchType", "MerchType")
                         .WithMany("Merchs")
                         .HasForeignKey("MerchTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MyMerchTracker.Models.ApplicationUser", "User")
+                        .WithMany("Merchs")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
