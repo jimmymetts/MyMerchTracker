@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MyMerchTracker.Migrations
 {
-    public partial class MyMerchOne : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,13 +54,13 @@ namespace MyMerchTracker.Migrations
                 name: "MerchType",
                 columns: table => new
                 {
-                    MerchTypeId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Label = table.Column<string>(maxLength: 255, nullable: false)
+                    label = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MerchType", x => x.MerchTypeId);
+                    table.PrimaryKey("PK_MerchType", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -176,8 +176,10 @@ namespace MyMerchTracker.Migrations
                     MerchId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(maxLength: 255, nullable: false),
+                    Title = table.Column<int>(nullable: false),
+                    Price = table.Column<double>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: false),
                     MerchTypeId = table.Column<int>(nullable: false),
                     ApplicationUserId = table.Column<string>(nullable: true)
                 },
@@ -194,7 +196,7 @@ namespace MyMerchTracker.Migrations
                         name: "FK_Merch_MerchType_MerchTypeId",
                         column: x => x.MerchTypeId,
                         principalTable: "MerchType",
-                        principalColumn: "MerchTypeId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 

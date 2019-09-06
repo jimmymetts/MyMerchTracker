@@ -203,9 +203,14 @@ namespace MyMerchTracker.Migrations
 
                     b.Property<int>("MerchTypeId");
 
+                    b.Property<double>("Price");
+
                     b.Property<int>("Quantity");
 
-                    b.Property<int>("UserId");
+                    b.Property<int>("Title");
+
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("MerchId");
 
@@ -218,15 +223,13 @@ namespace MyMerchTracker.Migrations
 
             modelBuilder.Entity("MyMerchTracker.Models.MerchType", b =>
                 {
-                    b.Property<int>("MerchTypeId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Label")
-                        .IsRequired()
-                        .HasMaxLength(255);
+                    b.Property<string>("label");
 
-                    b.HasKey("MerchTypeId");
+                    b.HasKey("Id");
 
                     b.ToTable("MerchType");
                 });

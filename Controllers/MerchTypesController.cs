@@ -10,22 +10,22 @@ using MyMerchTracker.Models;
 
 namespace MyMerchTracker.Controllers
 {
-    public class MerchsController : Controller
+    public class MerchTypesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public MerchsController(ApplicationDbContext context)
+        public MerchTypesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Merchs
+        // GET: MerchTypes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Merch.ToListAsync());
+            return View(await _context.MerchType.ToListAsync());
         }
 
-        // GET: Merchs/Details/5
+        // GET: MerchTypes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace MyMerchTracker.Controllers
                 return NotFound();
             }
 
-            var merch = await _context.Merch
-                .FirstOrDefaultAsync(m => m.MerchId == id);
-            if (merch == null)
+            var merchType = await _context.MerchType
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (merchType == null)
             {
                 return NotFound();
             }
 
-            return View(merch);
+            return View(merchType);
         }
 
-        // GET: Merchs/Create
+        // GET: MerchTypes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Merchs/Create
+        // POST: MerchTypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MerchId,Description,Quantity,UserId,MerchTypeId")] Merch merch)
+        public async Task<IActionResult> Create([Bind("Id,label")] MerchType merchType)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(merch);
+                _context.Add(merchType);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(merch);
+            return View(merchType);
         }
 
-        // GET: Merchs/Edit/5
+        // GET: MerchTypes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace MyMerchTracker.Controllers
                 return NotFound();
             }
 
-            var merch = await _context.Merch.FindAsync(id);
-            if (merch == null)
+            var merchType = await _context.MerchType.FindAsync(id);
+            if (merchType == null)
             {
                 return NotFound();
             }
-            return View(merch);
+            return View(merchType);
         }
 
-        // POST: Merchs/Edit/5
+        // POST: MerchTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MerchId,Description,Quantity,UserId,MerchTypeId")] Merch merch)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,label")] MerchType merchType)
         {
-            if (id != merch.MerchId)
+            if (id != merchType.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace MyMerchTracker.Controllers
             {
                 try
                 {
-                    _context.Update(merch);
+                    _context.Update(merchType);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MerchExists(merch.MerchId))
+                    if (!MerchTypeExists(merchType.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace MyMerchTracker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(merch);
+            return View(merchType);
         }
 
-        // GET: Merchs/Delete/5
+        // GET: MerchTypes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace MyMerchTracker.Controllers
                 return NotFound();
             }
 
-            var merch = await _context.Merch
-                .FirstOrDefaultAsync(m => m.MerchId == id);
-            if (merch == null)
+            var merchType = await _context.MerchType
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (merchType == null)
             {
                 return NotFound();
             }
 
-            return View(merch);
+            return View(merchType);
         }
 
-        // POST: Merchs/Delete/5
+        // POST: MerchTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var merch = await _context.Merch.FindAsync(id);
-            _context.Merch.Remove(merch);
+            var merchType = await _context.MerchType.FindAsync(id);
+            _context.MerchType.Remove(merchType);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MerchExists(int id)
+        private bool MerchTypeExists(int id)
         {
-            return _context.Merch.Any(e => e.MerchId == id);
+            return _context.MerchType.Any(e => e.Id == id);
         }
     }
 }

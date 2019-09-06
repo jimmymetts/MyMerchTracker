@@ -10,17 +10,14 @@ namespace MyMerchTracker.Models
     public class MerchType
     {
         [Key]
-        public int MerchTypeId { get; set; }
+        public int Id { get; set; }
 
-        [Required]
-        [StringLength(255)]
-        [Display(Name ="Merch Type")]
-        public string Label { get; set; }
+        public string label { get; set; }
 
-        [NotMapped]
-        public int Quantity { get; set; }
+
 
         public virtual ICollection<Merch> Merchs { get; set; }
     }
 
 }
+
