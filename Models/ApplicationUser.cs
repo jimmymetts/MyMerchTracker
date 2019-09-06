@@ -13,11 +13,11 @@ namespace MyMerchTracker.Models
     
     [Required]
     [Display(Name="First Name")]
-    public int FirstName { get; set; }
+    public string FirstName { get; set; }
 
     [Required]
     [Display(Name = "Last Name")]
-    public int LastName { get; set; }
+    public string LastName { get; set; }
 
     public virtual ICollection<Merch> Merchs { get; set; }
 
