@@ -15,7 +15,7 @@ namespace MyMerchTracker.Controllers
         private readonly ApplicationDbContext _context;
 
         public MerchesController(ApplicationDbContext context)
-        {
+        { 
             _context = context;
         }
 
